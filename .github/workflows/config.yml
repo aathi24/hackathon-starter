@@ -3,7 +3,7 @@ name: be-harvester CI
 on:
   push:
     branches:         
-    - main   
+    - master   
 jobs:
   build-and-push:
     name: Build and push image to AWS ECR
