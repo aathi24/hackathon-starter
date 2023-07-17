@@ -40,6 +40,16 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+      env:
+        REPORT_PATH: trivy-report.txt
+    - name: Save Trivy scan report
+      run: |
+        echo "${{ steps.trivy-scan.outputs.results }}" > $REPORT_PATH
+    - name: Upload Trivy scan report
+      uses: actions/upload-artifact@v2
+      with:
+          name: Trivy Scan Report
+          path: $REPORT_PATH
 
 
 
