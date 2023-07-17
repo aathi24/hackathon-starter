@@ -34,7 +34,7 @@ jobs:
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-          image-ref: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          image-ref: 310570313994.dkr.ecr.us-east-1.amazonaws.com/nodejs:${{ github.sha }}
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
