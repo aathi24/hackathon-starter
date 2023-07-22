@@ -1,16 +1,25 @@
+# Use the official Node.js image
 FROM node:16-slim
 
+# Set the working directory inside the container
 WORKDIR /starter
-ENV NODE_ENV development
 
-COPY package.json /starter/package.json
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
+# Install pm2 globally
 RUN npm install pm2 -g
-RUN npm install --production
 
-COPY .env.example /starter/.env.example
-COPY . /starter
+# Install the project dependencies (including development dependencies)
+RUN npm install
 
-CMD ["pm2-runtime","app.js"]
+# Copy the rest of the application files
+COPY . .
+
+# Expose the port that your application listens on (if necessary)
+# EXPOSE 3000
+
+# Start your application using pm2
+CMD ["pm2-runtime", "app.js"]
 
 EXPOSE 8080
